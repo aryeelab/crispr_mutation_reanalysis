@@ -1,0 +1,12 @@
+bsub -q big-multi -n 16 sh mutectRunner.sh SRR5450998 SRR5450996 n98_t96
+bsub -q big-multi -n 16 sh mutectRunner.sh SRR5450998 SRR5450997 n98_t97
+
+bsub -q big-multi -n 16 sh mutectRunner.sh SRR5450997 SRR5450998 n97_t98
+bsub -q big-multi -n 16 sh mutectRunner.sh SRR5450997 SRR5450996 n97_t96
+
+bsub -q big-multi -n 16 sh mutectRunner.sh SRR5450996 SRR5450998 n96_t98
+bsub -q big-multi -n 16 sh mutectRunner.sh SRR5450996 SRR5450997 n96_t97
+
+
+
+

@@ -42,3 +42,7 @@ did filtering in `R` using this input file:
 ```
 zcat chrMouseSNPs.vcf.gz chrdbSNP.vcf.gz | cut -f 1,2 | sort -gk 1,2  | uniq > allMouseSNPloci.bed
 ```
+
+# Important
+
+- Install [git large file storage](https://git-lfs.github.com/) before cloning repository.
