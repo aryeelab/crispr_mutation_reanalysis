@@ -1,0 +1,36 @@
+bsub -q big sh mutectRunner.sh SRR5450998 SRR5450996 n98_t96 chr17
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450998 SRR5450996 n98_t96 chr18
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450998 SRR5450996 n98_t96 chr19
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450998 SRR5450997 n98_t97 chr17
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450998 SRR5450997 n98_t97 chr18
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450998 SRR5450997 n98_t97 chr19
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450997 SRR5450996 n97_t96 chr17
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450997 SRR5450996 n97_t96 chr18
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450997 SRR5450996 n97_t96 chr19
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450997 SRR5450998 n97_t98 chr17
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450997 SRR5450998 n97_t98 chr18
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450997 SRR5450998 n97_t98 chr19
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450996 SRR5450997 n96_t97 chr17
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450996 SRR5450997 n96_t97 chr18
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450996 SRR5450997 n96_t97 chr19
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450996 SRR5450998 n96_t98 chr17
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450996 SRR5450998 n96_t98 chr18
+sleep 1
+bsub -q big sh mutectRunner.sh SRR5450996 SRR5450998 n96_t98 chr19
+sleep 1
