@@ -1,0 +1,78 @@
+ $java_bin_dir/bin/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T PrintReads -nct 4 -rf BadCigar --disable_indel_quals --emit_original_quals -R <PATH>/Resources/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.dedup.joint.realigned.bam -o $Sample_dir/analysis/FXX.recalibrated.bam -BQSR $Sample_dir/qc/FXX.recal.grp
+ 
+<PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/CollectGcBiasMetrics.jar ASSUME_SORTED=true VALIDATION_STRINGENCY=SILENT INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias_metrics REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta CHART_OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias.pdf SUMMARY_OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias_summary
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx73728m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T IndelRealigner -rf BadCigar --consensusDeterminationModel USE_READS -dcov 1000 -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.dedup.bam -I $Sample_dir/analysis/FXX.dedup.bam -I $Sample_dir/analysis/FXX.dedup.bam -targetIntervals $Sample_dir/analysis/FXX.for_realigner.joint.intervals -nWayOut $Sample_dir/analysis/for_realigner.joint.map
+ 
+<PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T BaseRecalibrator --interval_padding 200 --downsample_to_fraction 0.1 -rf BadCigar -nct 4 -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.dedup.joint.realigned.bam -o $Sample_dir/qc/FXX.recal.grp -knownSites <PATH>/Mus_musculus/GRCm38.70/dbSNP_v138.vcf.gz -knownSites <PATH>/Mus_musculus/GRCm38.70/mgp.v3.indels.clean.vcf.gz
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T BaseRecalibrator --interval_padding 200 --downsample_to_fraction 0.1 -rf BadCigar -nct 4 -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.dedup.joint.realigned.bam -o $Sample_dir/qc/FXX.recal.grp -knownSites <PATH>/Mus_musculus/GRCm38.70/dbSNP_v138.vcf.gz -knownSites <PATH>/Mus_musculus/GRCm38.70/mgp.v3.indels.clean.vcf.gz
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T PrintReads -nct 4 -rf BadCigar --disable_indel_quals --emit_original_quals -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.dedup.joint.realigned.bam -o $Sample_dir/analysis/FXX.recalibrated.bam -BQSR $Sample_dir/qc/FXX.recal.grp
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T PrintReads -nct 4 -rf BadCigar --disable_indel_quals --emit_original_quals -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.dedup.joint.realigned.bam -o $Sample_dir/analysis/FXX.recalibrated.bam -BQSR $Sample_dir/qc/FXX.recal.grp
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/CollectMultipleMetrics.jar PROGRAM=CollectAlignmentSummaryMetrics PROGRAM=MeanQualityByCycle PROGRAM=CollectInsertSizeMetrics PROGRAM=QualityScoreDistribution VALIDATION_STRINGENCY=SILENT REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.MultipleMetrics
+ 
+<PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T BaseRecalibrator --interval_padding 200 --downsample_to_fraction 0.1 -rf BadCigar -nct 4 -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.dedup.joint.realigned.bam -o $Sample_dir/qc/FXX.recal.grp -knownSites <PATH>/Mus_musculus/GRCm38.70/dbSNP_v138.vcf.gz -knownSites <PATH>/Mus_musculus/GRCm38.70/mgp.v3.indels.clean.vcf.gz
+ 
+<PATH>/samtools/samtools-0.1.18/samtools view  -F 1024 -q 1 -b $Sample_dir/analysis/FXX.final.bam | <PATH>/bedtools/bedtools-2.17.0/bin/genomeCoverageBed -ibam stdin -g <PATH>/Mus_musculus/GRCm38.70/GRCm38_70.txt > $Sample_dir/qc/FXX.BedTools.coverage
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T FlagStat -l INFO -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.final.bam -o $Sample_dir/qc/FXX.FlagStat.txt
+ 
+ cut -f1,2 <PATH>/Concordance/SureSelect_Mouse_All_Exon_V1_GRCm38_markers_MAF_0.4_LD_0.8.txt > $Sample_dir/concordance/mpileup/marker_file_positions.txt                                                 set -o pipefail && <PATH>/samtools/samtools-1.1/samtools mpileup -q 20 -Q 20 -t DP --ff DUP -Iugvf <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -l $Sample_dir/concordance/mpileup/marker_file_positions.txt $Sample_dir/analysis/FXX.final.bam | <PATH>/bcftools/bcftools-1.1/bcftools call -f GP -m - > $Sample_dir/concordance/mpileup/concordance_mpileup_FXX.vcf                                
+rm $Sample_dir/concordance/mpileup/marker_file_positions.txt
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/CollectGcBiasMetrics.jar ASSUME_SORTED=true VALIDATION_STRINGENCY=SILENT INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias_metrics REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta CHART_OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias.pdf SUMMARY_OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias_summary
+ 
+ <PATH>/samtools/samtools-0.1.18/samtools view  -F 1024 -q 1 -b $Sample_dir/analysis/FXX.final.bam | <PATH>/bedtools/bedtools-2.17.0/bin/genomeCoverageBed -ibam stdin -g <PATH>/Mus_musculus/GRCm38.70/GRCm38_70.txt > $Sample_dir/qc/FXX.BedTools.coverage
+ 
+ cut -f1,2 <PATH>/Concordance/SureSelect_Mouse_All_Exon_V1_GRCm38_markers_MAF_0.4_LD_0.8.txt > $Sample_dir/concordance/mpileup/marker_file_positions.txt                                                set -o pipefail && <PATH>/samtools/samtools-1.1/samtools mpileup -q 20 -Q 20 -t DP --ff DUP -Iugvf <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -l $Sample_dir/concordance/mpileup/marker_file_positions.txt $Sample_dir/analysis/FXX.final.bam | <PATH>/bcftools/bcftools-1.1/bcftools call -f GP -m - > $Sample_dir/concordance/mpileup/concordance_mpileup_FXX.vcf                                
+ rm $Sample_dir/concordance/mpileup/marker_file_positions.txt
+ 
+ /bin/grep -e "^Y" $Sample_dir/qc/FXX.BedTools.coverage | /bin/cut -f2- > $Sample_dir/qc/FXX.BedTools.chrY.coverage
+ /bin/grep -e "^genome" $Sample_dir/qc/FXX.BedTools.coverage | /bin/cut -f2- > $Sample_dir/qc/FXX.BedTools.genome.coverage
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/CollectGcBiasMetrics.jar ASSUME_SORTED=true VALIDATION_STRINGENCY=SILENT INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias_metrics REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta CHART_OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias.pdf SUMMARY_OUTPUT=$Sample_dir/qc/FXX.GcBiasMetrics.gc_bias_summary
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T FlagStat -l INFO -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.final.bam -o $Sample_dir/qc/FXX.FlagStat.txt
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/CollectMultipleMetrics.jar PROGRAM=CollectAlignmentSummaryMetrics PROGRAM=MeanQualityByCycle PROGRAM=CollectInsertSizeMetrics PROGRAM=QualityScoreDistribution VALIDATION_STRINGENCY=SILENT REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.MultipleMetrics
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/CollectMultipleMetrics.jar PROGRAM=CollectAlignmentSummaryMetrics PROGRAM=MeanQualityByCycle PROGRAM=CollectInsertSizeMetrics PROGRAM=QualityScoreDistribution VALIDATION_STRINGENCY=SILENT REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.MultipleMetrics
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.119/CollectWgsMetrics.jar VALIDATION_STRINGENCY=SILENT REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.CollectWgsMetrics.txt
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.119/CollectWgsMetrics.jar VALIDATION_STRINGENCY=SILENT REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.CollectWgsMetrics.txt
+ 
+<PATH>/java -XX:ParallelGCThreads=2 -Djava.io.tmpdir=<PATH> -Xmx65536M -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T HaplotypeCaller --genotyping_mode DISCOVERY -A AlleleBalanceBySample -A DepthPerAlleleBySample -A DepthPerSampleHC -A InbreedingCoeff -A MappingQualityZeroBySample -A StrandBiasBySample -A Coverage -A FisherStrand -A HaplotypeScore -A MappingQualityRankSumTest -A MappingQualityZero -A QualByDepth -A RMSMappingQuality -A ReadPosRankSumTest -A VariantType -l INFO --emitRefConfidence GVCF -rf BadCigar --variant_index_parameter 128000 --variant_index_type LINEAR -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -nct 5 -I $Sample_dir/analysis/FXX.final.bam -o $Sample_dir/analysis/FXX.haplotypeCalls.er.raw.vcf
+ 
+<PATH>/java -Djava.io.tmpdir=<PATH> -Xmx73728m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T RealignerTargetCreator --interval_padding 200 -rf BadCigar -nt 24 -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.dedup.bam -I $Sample_dir/analysis/FXX.dedup.bam -I $Sample_dir/analysis/FXX.dedup.bam -o $Sample_dir/analysis/FXX.for_realigner.joint.intervals
+ 
+ 
+ cut -f1,2 <PATH>/Concordance/SureSelect_Mouse_All_Exon_V1_GRCm38_markers_MAF_0.4_LD_0.8.txt > $Sample_dir/concordance/mpileup/marker_file_positions.txt                                                set -o pipefail && <PATH>/samtools/samtools-1.1/samtools mpileup -q 20 -Q 20 -t DP --ff DUP -Iugvf <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -l $Sample_dir/concordance/mpileup/marker_file_positions.txt $Sample_dir/analysis/FXX.final.bam | <PATH>/bcftools/bcftools-1.1/bcftools call -f GP -m - > $Sample_dir/concordance/mpileup/concordance_mpileup_FXX.vcf                                
+ rm $Sample_dir/concordance/mpileup/marker_file_positions.txt
+
+<PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -jar <PATH>/GenomeAnalysisTK/GenomeAnalysisTK-3.4-0/GenomeAnalysisTK.jar -T FlagStat -l INFO -R <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta -I $Sample_dir/analysis/FXX.final.bam -o $Sample_dir/qc/FXX.FlagStat.txt
+ <PATH>/java/jre1.7.0_25/bin/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.119/CollectWgsMetrics.jar VALIDATION_STRINGENCY=SILENT REFERENCE_SEQUENCE=<PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta INPUT=$Sample_dir/analysis/FXX.final.bam OUTPUT=$Sample_dir/qc/FXX.CollectWgsMetrics.txt
+ 
+ /bin/grep -e "^Y" $Sample_dir/qc/FXX.BedTools.coverage | /bin/cut -f2- > $Sample_dir/qc/FXX.BedTools.chrY.coverage
+ /bin/grep -e "^genome" $Sample_dir/qc/FXX.BedTools.coverage | /bin/cut -f2- > 
+ 
+ $Sample_dir/qc/FXX.BedTools.genome.coverage
+ <PATH>/samtools/samtools-0.1.18/samtools view  -F 1024 -q 1 -b $Sample_dir/analysis/FXX.final.bam | <PATH>/bedtools/bedtools-2.17.0/bin/genomeCoverageBed -ibam stdin -g <PATH>/Mus_musculus/GRCm38.70/GRCm38_70.txt > $Sample_dir/qc/FXX.BedTools.coverage
+
+ /bin/grep -e "^Y" $Sample_dir/qc/FXX.BedTools.coverage | /bin/cut -f2- > $Sample_dir/qc/FXX.BedTools.chrY.coverage
+ /bin/grep -e "^genome" $Sample_dir/qc/FXX.BedTools.coverage | /bin/cut -f2- > $Sample_dir/qc/FXX.BedTools.genome.coverage
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=5 -jar <PATH>/picard-tools/picard-tools-1.83/MarkDuplicates.jar CREATE_INDEX=true MAX_RECORDS_IN_RAM=2000000 VALIDATION_STRINGENCY=SILENT M=/data/analysis/tsangs-375/Project_TSA_11437_B01_SOM_WGS/Sample_FXX/qc/FXX.dedup.metrics I=$Sample_dir/analysis/FXX.merged.bam O=$Sample_dir/analysis/FXX.dedup.bam
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/MergeSamFiles.jar USE_THREADING=true MAX_RECORDS_IN_RAM=2000000 CREATE_INDEX=true VALIDATION_STRINGENCY=SILENT INPUT=/d$bam_dir/FXX_TCCGGAGA-TAATCTTA_BC934WANXX_L006_001.aln.bam INPUT=/d$bam_dir/FXX_TCCGGAGA-TAATCTTA_BC934WANXX_L007_001.aln.bam OUTPUT=$Sample_dir/analysis/FXX.merged.bam
+ 
+ /d$java_bin_dir/bin/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/MergeSamFiles.jar USE_THREADING=true MAX_RECORDS_IN_RAM=2000000 CREATE_INDEX=true VALIDATION_STRINGENCY=SILENT INPUT=$bam_dir/FXX_ATTCAGAA_AC8H30ANXX_L006_001.aln.bam INPUT=$bam_dir/FXX_ATTCAGAA-AGGCGAAG_BC6RMGANXX_L001_001.aln.bam INPUT=$bam_dir/FXX_ATTCAGAA_AC8H30ANXX_L008_001.aln.bam INPUT=$bam_dir/FXX_ATTCAGAA-AGGCGAAG_BC6RMGANXX_L002_001.aln.bam INPUT=$bam_dir/FXX_ATTCAGAA_AC8H30ANXX_L004_001.aln.bam INPUT=$bam_dir/FXX_ATTCAGAA_AC8H30ANXX_L007_001.aln.bam INPUT=$bam_dir/FXX_ATTCAGAA_AC8H30ANXX_L005_001.aln.bam OUTPUT=$Sample_dir/analysis/FXX.merged.bam
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=4 -jar <PATH>/picard-tools/picard-tools-1.83/MergeSamFiles.jar USE_THREADING=true MAX_RECORDS_IN_RAM=2000000 CREATE_INDEX=true VALIDATION_STRINGENCY=SILENT INPUT=$bam_dir/FXX_GAGATTCC_AC8H30ANXX_L008_001.aln.bam INPUT=$bam_dir/FXX_GAGATTCC_AC8H30ANXX_L006_001.aln.bam INPUT=$bam_dir/FXX_GAGATTCC_AC8H30ANXX_L007_001.aln.bam INPUT=$bam_dir/FXX_GAGATTCC_AC8H30ANXX_L005_001.aln.bam INPUT=$bam_dir/FXX_GAGATTCC_AC8H30ANXX_L004_001.aln.bam OUTPUT=$Sample_dir/analysis/FXX.merged.bam
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=5 -jar <PATH>/picard-tools/picard-tools-1.83/MarkDuplicates.jar CREATE_INDEX=true MAX_RECORDS_IN_RAM=2000000 VALIDATION_STRINGENCY=SILENT M=$Sample_dir/qc/FXX.dedup.metrics I=$Sample_dir/analysis/FXX.merged.bam O=$Sample_dir/analysis/FXX.dedup.bam
+ 
+ <PATH>/java -Djava.io.tmpdir=<PATH> -Xmx24576m -XX:ParallelGCThreads=5 -jar <PATH>/picard-tools/picard-tools-1.83/MarkDuplicates.jar CREATE_INDEX=true MAX_RECORDS_IN_RAM=2000000 VALIDATION_STRINGENCY=SILENT M=$Sample_dir/qc/FXX.dedup.metrics I=$Sample_dir/analysis/FXX.merged.bam O=$Sample_dir/analysis/FXX.dedup.bam
