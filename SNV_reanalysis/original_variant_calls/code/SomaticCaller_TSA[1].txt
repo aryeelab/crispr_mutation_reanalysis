@@ -1,0 +1,34 @@
+#LoFreq
+
+<PATH>/LoFreq/lofreq_star-2.1.3a/bin/lofreq2_somatic.py \
+-n <NORMAL_BAM> \
+-t <TUMOR_BAM> \
+-f /data/NYGC/Resources/Reference_genomes/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta \
+-o <OUT>/F03--FVB.lofreq.v2.1.3a. \
+--threads 12
+
+
+#Strelka
+<PATH>/strelka/strelka-v1.0.14/bin/configureStrelkaWorkflow.pl \
+--tumor <TUMOR_BAM> \
+--normal <NORMAL_BAM>  \
+--ref <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fast \
+--config <PATH>/strelka/strelka-v1.0.14/etc/strelka_config_bwa_default.ini \
+--output-dir <TEMP_DIR>
+
+
+#Mutect
+<PATH>/java/jdk-1.7.0.79/bin/java \
+-Djava.io.tmpdir=${TEMP_DIR} \
+-Xmx24g \
+-jar <PATH>/muTect-1.1.7/muTect-1.1.7.jar \
+--analysis_type MuTect \
+--num_threads 1 \
+--reference_sequence <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.fasta \
+-B:dbsnp,VCF <PATH>/Mus_musculus/GRCm38.70/dbSNP_v138.vcf \
+--intervals <PATH>/Mus_musculus/GRCm38.70/Mus_musculus.GRCm38.70.dna.intervals \
+--input_file:normal <NORMAL_BAM> \
+--input_file:tumor <TUMOR_BAM> \
+--baqGapOpenPenalty 30 \
+--out <OUT>/$F03--FVB.snv.mutect.v1.1.7.txt
+ 
