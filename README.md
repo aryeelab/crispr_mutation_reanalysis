@@ -43,6 +43,21 @@ did filtering in `R` using this input file:
 zcat chrMouseSNPs.vcf.gz chrdbSNP.vcf.gz | cut -f 1,2 | sort -gk 1,2  | uniq > allMouseSNPloci.bed
 ```
 
+# Downsampling CRISPR treated samples
+
+To account for coverage variation, we downsample the two treated samples to 60\% of the 
+total depth (30X / 50X coverage as reported in the paper. Also, proportion of mapped reads
+for control / treated were both between 59.5 and 60.0 \%) using `samtools`--
+
+```
+samtools view -s 3.6 -b SRR5450997.final.bam -o SRR5450997.subsample.bam
+samtools view -s 3.6 -b SRR5450998.final.bam -o SRR5450998.subsample.bam
+```
+**Note:** here the `3` is the seed for subsampling. Then, we have to index these guys. 
+
+
 # Important
 
 - Install [git large file storage](https://git-lfs.github.com/) before cloning repository.
+
+
