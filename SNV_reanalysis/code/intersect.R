@@ -20,7 +20,7 @@ readMutect <- function(sample, filtDBSNP = TRUE){
   file <- paste0("../new_variant_calls_raw/mutect_out/mutect_", sample, "/", sample, "mutect.res.tsv")
   df <- read.table(file, sep = "\t", header = TRUE)
   if(filtDBSNP) df <- df[df$dbsnp_site == "NOVEL", ]
-  gr <- makeGRangesFromDataFrame(df, keep.extra.columns = TRUE, seqnames.field = "V1", start.field = "V2", end.field = "V2")
+  gr <- makeGRangesFromDataFrame(df, keep.extra.columns = TRUE, seqnames.field = "contig", start.field = "position", end.field = "position")
   gr
 }
 
@@ -33,5 +33,7 @@ readLofreq <- function(sample){
 
 sample <- "n98_t96"
 
-
+s <- readStrelka(sample)
+m <- readMutect(sample)
+l <- readLofreq(sample)
 
