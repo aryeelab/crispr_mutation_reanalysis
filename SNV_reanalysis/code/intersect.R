@@ -45,6 +45,16 @@ intersectAll <- function(sample){
 F03_FVB <- intersectAll("n98_t97")
 F05_FVB <- intersectAll("n98_t96")
 
+flip_F03_FVB <- intersectAll("n97_t98")
+flip_F05_FVB <- intersectAll("n96_t98")
+
+write.table(data.frame(F03_FVB)[,c(1,2,3)], file = "../new_processed_calls/F03_FVB_n98_t97.processed.bed", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(data.frame(F05_FVB)[,c(1,2,3)], file = "../new_processed_calls/F05_FVB_n98_t96.processed.bed", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(data.frame(flip_F03_FVB)[,c(1,2,3)], file = "../new_processed_calls/flip_FVB_F05_n97_t98.processed.bed", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(data.frame(flip_F05_FVB)[,c(1,2,3)], file = "../new_processed_calls/flip_FVB_F05_n96_t98.processed.bed", quote = FALSE, row.names = FALSE, col.names = FALSE)
+
+
+
 length(intersectAll("n97_t98"))
 
 # Read in the published variant data
