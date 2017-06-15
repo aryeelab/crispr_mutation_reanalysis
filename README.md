@@ -1,6 +1,6 @@
 <br><br>
 
-# Reanalysis Unexpected mutations after CRISPR–Cas9 editing _in vivo_
+# Reanalysis of Unexpected mutations after CRISPR–Cas9 editing _in vivo_
 
 Analysis by members of the [Aryee](https://aryee.mgh.harvard.edu/), [Joung](http://www.jounglab.org/), and [Pinello](http://pinellolab.org/) Labs at MGH/Harvard.
 This repository contains the scripts, commands, and most data required for the reanalysis of
@@ -28,17 +28,8 @@ F05 - Treated - 96
 ```
 
 When doing variant calling, the normal tissue is specified with an `n` and the tumor tissue with a `t`. 
-For example, the output file of 
-
-## Mutation Calling Software Links
-
-To perform SNV identification, the following software (as outlined in the original manuscript) were used:
-
-- [Lofreq](http://csb5.github.io/lofreq/commands/)
-- [Mutect](http://archive.broadinstitute.org/cancer/cga/mutect_run)
-- [Strelka](https://github.com/Illumina/strelka/blob/master/docs/userGuide/README.md)
-
-Binary executables of the versions that we used in the reanalysis are [available here](variantCallingPipeline/binaries)
+For example, the output file of `n96_t98` would be the 96 sample (F05) is the `n = normal` and
+98 sample (Control) is `t = tumor` when doing variant calling. 
 
 ## Important
 

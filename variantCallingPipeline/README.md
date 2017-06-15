@@ -8,12 +8,12 @@
 
 **Execution order:**
 
-- 1. align/sort-- [01_alignBWA.sh](01_alignBWA.sh)
-- 2. remove duplicates-- [02_removeDuplicates.sh](02_removeDuplicates.sh)
-- 3. add read groups for base recalibration-- [03_addReadGroup.sh](03_addReadGroup.sh)
-- 4. identify sites (indels) for realignment-- [04_indelRealignIdentificaiton.sh](04_indelRealignIdentificaiton.sh)
-- 5. realign identified loci from `4`-- [05_indelRealign.sh](05_indelRealign.sh)
-- 6. print reads (makes final `.bam file)-- [06_printReads.sh](06_printReads.sh)
+1. align/sort: [01_alignBWA.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/01_alignBWA.sh)
+2. remove duplicates: [02_removeDuplicates.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/02_removeDuplicates.sh)
+3. add read groups for base recalibration: [03_addReadGroup.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/03_addReadGroup.sh)
+4. identify sites (indels) for realignment: [04_indelRealignIdentificaiton.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/04_indelRealignIdentificaiton.sh)
+5. realign identified loci from 4: [05_indelRealign.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/05_indelRealign.sh)
+6. print reads (makes final .bam file): [06_printReads.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/06_printReads.sh)
 
 # Variant Calling Scripts
 
@@ -21,23 +21,23 @@ These specific scripts were not necessarily executed "as is" but were often
 divided into individual scripts used to parallelize the execution over multiple
 nodes on Erisone. 
 
-- Variant calling with Lofreq-- The [lofreqCommads.sh](call_mutations/strelkaCommands.sh) file 
-contains 
-- Variant calling with muTect-- Built [this execution shell script](call_mutations/mutectExec.sh)
-from [this R script](makeMutectExec.R) in order to run [this muTect shell command](mutectRunner.sh)
+- Variant calling with [Lofreq](http://csb5.github.io/lofreq/commands/)-- The [lofreqCommads.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh) file 
+contains all commands used to call variants with Lofreq `cat` together. In actuality, each command was run individually for performance. 
+- Variant calling with [muTect](http://archive.broadinstitute.org/cancer/cga/mutect_run)-- Built [this execution shell script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/call_mutations/mutectExec.sh)
+from [this R script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/makeMutectExec.R) in order to run [this muTect shell command](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectRunner.sh)
 in parallel over each sample pair per chromsome
-- Variant calling with Strelka-- [strelkaCommands.sh]()
+- Variant calling with [Strelka](https://github.com/Illumina/strelka/blob/master/docs/userGuide/README.md)-- [strelkaCommands.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh)
 
 # Other noteworthy bits
 
 Some details on how particular portions of our variant call pipeline were performed. 
 
-## Versions of software / binaries
+### Versions of software / binaries
 
 The executables used in our analysis are available in the [binaries](binaries/) folder
 in this repository.
 
-## SNP files
+### SNP files
 
 The location of these files was specified in the supplement of the manuscript. The processing of these
 files entailed the following. First, these were downloaded--
@@ -69,7 +69,7 @@ To get a true bed file--
 zcat allMouseSNPloci.bed.gz | awk '{print $0"\t"$2+1}' > snpLoci.bed
 ```
 
-## Downsampling CRISPR treated samples
+### Downsampling CRISPR treated samples
 
 To account for coverage variation, we downsample the two treated samples to 60\% of the 
 total depth (30X / 50X coverage as reported in the paper. Also, proportion of mapped reads
