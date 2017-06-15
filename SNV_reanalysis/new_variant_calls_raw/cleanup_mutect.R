@@ -1,4 +1,9 @@
-#
+# This script aggregates the (large) raw output from MuTect
+# (One file per chromosome; not filtered for whether variants passed filter or not)
+# Per comparison group and exports them to a singular file that we can use for post-processing
+
+# NOTE: The raw data that needed to reproduce the output is not present due to the file size constraints
+# on GitHub
 
 ss <- c("n96_t97", "n96_t98", "n97_t96", "n97_t98", "n98_t96", "n98_t97")
 sapply(ss, function(s){

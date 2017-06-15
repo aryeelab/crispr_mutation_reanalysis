@@ -1,6 +1,10 @@
-# Shell-ish scripts used for analysis
+<br><br>
 
-Ordering:
+# Scripts used for variant calling
+
+**Contact:** [Caleb Lareau](mailto:caleblareau@g.harvard.edu)
+
+##Execution order:
 
 - 1. align/sort-- `alignBWA.sh`
 - 2. remove duplicates-- `removeDuplicates.sh`
@@ -9,3 +13,4 @@ Ordering:
 - 3b. variant calling with Mutect
 - 3c. variant calling with Strelka
 
+<br><br>
