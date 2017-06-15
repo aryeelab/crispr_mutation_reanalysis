@@ -8,7 +8,7 @@
 
 **Execution order:**
 
-1. align/sort: [01_alignBWA.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/01_alignBWA.sh)
+1. align/sort: [01_alignBWA.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/01_align_BWAmem.sh)
 2. remove duplicates: [02_removeDuplicates.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/02_removeDuplicates.sh)
 3. add read groups for base recalibration: [03_addReadGroup.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/03_addReadGroup.sh)
 4. identify sites (indels) for realignment: [04_indelRealignIdentificaiton.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/04_indelRealignIdentificaiton.sh)
@@ -23,7 +23,7 @@ nodes on Erisone.
 
 - Variant calling with [Lofreq](http://csb5.github.io/lofreq/commands/)-- The [lofreqCommads.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh) file 
 contains all commands used to call variants with Lofreq `cat` together. In actuality, each command was run individually for performance. 
-- Variant calling with [muTect](http://archive.broadinstitute.org/cancer/cga/mutect_run)-- Built [this execution shell script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/call_mutations/mutectExec.sh)
+- Variant calling with [muTect](http://archive.broadinstitute.org/cancer/cga/mutect_run)-- Built [this execution shell script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectExec.sh)
 from [this R script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/makeMutectExec.R) in order to run [this muTect shell command](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectRunner.sh)
 in parallel over each sample pair per chromsome
 - Variant calling with [Strelka](https://github.com/Illumina/strelka/blob/master/docs/userGuide/README.md)-- [strelkaCommands.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh)

@@ -1,6 +1,6 @@
 <br><br>
 
-# Download the binaries we ran
+# Download the binaries that were used in the reanalysis
 
 - [GATK](GenomeAnalysisTK.jar)
 - [lofreq](lofreq)
