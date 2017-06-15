@@ -1,10 +1,22 @@
 # Reanalysis Unexpected mutations after CRISPR–Cas9 editing _in vivo_
 Commands and scripts for reanalysis of [this manuscript](https://www.nature.com/nmeth/journal/v14/n6/full/nmeth.4293.html).
 
+# File naming conventions
+
+Most samples in the reanalysis are ID'd by the last two digits of the `SRR` number. This table is the most useful key--
+
+```
+FVB - Control - 98
+F03 - Treated - 97
+F05 - Treated - 96
+```
+
+When doing variant calling, I specify the normal tissue with `n` and the tumor tissue with `t`. 
+For example, the output file of 
 
 # Mutation Calling Software Links
 
-When browsing the internet, I found [this guide](https://github.com/tinyheero/variant_calling_in_cancer_genomes_seminar), which seemed pretty solid. 
+When browsing the internet, I found [this guide](https://github.com/tinyheero/variant_calling_in_cancer_genomes_seminar), which seems useful. 
 
 - [Lofreq](http://csb5.github.io/lofreq/commands/)
 - [Mutect](http://archive.broadinstitute.org/cancer/cga/mutect_run)
@@ -58,6 +70,7 @@ samtools view -s 3.6 -b SRR5450998.final.bam -o SRR5450998.subsample.bam
 
 # Important
 
-- Install [git large file storage](https://git-lfs.github.com/) before cloning repository.
+- Install [git large file storage](https://git-lfs.github.com/) before cloning repository
+to get some of the larger `.bed` files.
 
 
