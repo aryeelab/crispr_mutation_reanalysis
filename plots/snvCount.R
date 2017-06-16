@@ -12,4 +12,4 @@ p1 <- ggplot(d, aes(normal, count, color = treated)) + pretty_plot() +
   geom_bar(width = 0.7, aes(fill = treated), colour="black", stat = "identity", position = position_dodge(width=0.7)) +
   scale_fill_manual(values=c('green4', 'firebrick', 'dodgerblue')) + 
   theme( legend.position="bottom")+labs(colour = "Treatment Mouse", fill = "Treatment Mouse") 
-ggsave(p1, file = "reanalysis_counts.png")
+ggsave(p1, file = "figures/reanalysis_counts.png")
