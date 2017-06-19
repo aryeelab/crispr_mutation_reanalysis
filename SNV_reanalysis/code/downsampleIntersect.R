@@ -21,6 +21,17 @@ F05_FVB <- intersectAll("n98_t96")
 F03_FVB_ds <- intersectAllDS("n98_t97")
 F05_FVB_ds <- intersectAllDS("n98_t96")
 
+
+length(intersectAll("n98_t97"))
+length(intersectAll("n97_t98"))
+length(intersectAllDS("n98_t97"))
+length(intersectAllDS("n97_t98"))
+
+
+length(intersectAll("n98_t97"))
+length(intersectAll("n98_t97"))
+
+
 # Quantify how many variants I was able to recall
 sum(countOverlaps(F03_FVB, F03_FVB_pub))/length(F03_FVB_pub)
 sum(countOverlaps(F05_FVB, F05_FVB_pub))/length(F05_FVB_pub)
@@ -30,8 +41,6 @@ sum(countOverlaps(F05_FVB_ds, F05_FVB_pub))/length(F05_FVB_pub)
 
 sum(countOverlaps(F03_FVB_ds, F03_FVB))/length(F03_FVB)
 sum(countOverlaps(F05_FVB_ds, F05_FVB))/length(F05_FVB)
-
-
 
 sum(countOverlaps(F03_FVB_pub, F05_FVB_pub))
 
