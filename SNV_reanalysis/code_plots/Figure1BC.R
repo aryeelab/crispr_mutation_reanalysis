@@ -7,9 +7,15 @@ df <- data.frame(fread("../new_processed_calls/processedGATK_20june.bed", sep = 
 names(df) <- c("chr", "start", "end", "mouse", "crispr", "snp")
 snps <- df[!df$crispr & df$snp,]
 other <- df[!df$crispr & !df$snp,]
+all <-  df[!df$crispr,]
+table(all$mouse) / sum(table(all$mouse))
+table(other$mouse) / sum(table(other$mouse))
+table(snps$mouse) / sum(table(snps$mouse))
 
 dim(snps)
 dim(other)
+dim(all)
+table(all$mouse)
 
 f1bdf <- data.frame(
   rate = c(table(snps$mouse)/sum(table(snps$mouse)), table(other$mouse)/sum(table(other$mouse))) * 100,
@@ -33,6 +39,12 @@ f1bplot <- ggplot(f1bdf, aes(shared, rate, color = type)) + pretty_plot() +
 
 ggsave(f1bplot, file = "Figure1B.png")
 
-heatmap.2(t(distingmat), labRow=c("F05", "F03", "FVB"), labCol = NULL, trace="none",
-          col = c("grey", "dodgerblue"), key = FALSE)
+distMat <- data.frame(
+  F03 = as.numeric(snps$mouse == "F03"), 
+  F05 = as.numeric(snps$mouse == "F05"), 
+  FVB = as.numeric(snps$mouse == "FVB")
+) %>% data.matrix()
+
+heatmap(distMat, labRow=c("F05", "F03", "FVB"), labCol = NULL, trace="none",
+          col = c("grey", "purple3"), key = FALSE)
 

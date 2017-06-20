@@ -1,11 +1,11 @@
 library(data.table)
-library(GenomicRanges)
 
 # 96 F05 Treated
 # 97 F03 Treated
 # 98 FVB Control
 
 df <- data.frame(fread("zcat < calledInAll.gatk.vcf.gz", sep = "\t", skip = 193))
+snps <- data.frame(fread("zcat < allMouseSNPloci.bed.gz", sep = "\t"))
 
 gdf <- data.frame(
   gt96 = unname(sapply(df$V10, function(d){strsplit(d, split = ":")[[1]][1]})),
@@ -21,16 +21,16 @@ gdf <- data.frame(
   gt98 = as.character(gdf$gt98), stringsAsFactors = FALSE
 )
 
+# Annotate with common SNP or previously ID'd as 'Crispr' snp 
+isCommonSNP <- paste0(dff$V1,"_",as.character(dff$V2)) %in% paste0(snps$V1,"_",as.character(snps$V2))
+
 # Filter Variants based on -- 1) only SNVs, 2) different in 1 mouse, 3) one alt allele, 4)  quality > 20 
 gv <- c("0/0", "0/1", "1/1")
-boo1 <- (gdf$gt96 != gdf$gt97) | (gdf$gt96 != gdf$gt98) | (gdf$gt97 != gdf$gt98) # Differential Variants
+boo1 <- ((gdf$gt96 != gdf$gt97) & (gdf$gt97 == gdf$gt98)) | ((gdf$gt97 != gdf$gt98) & (gdf$gt96 == gdf$gt98)) | ((gdf$gt98 != gdf$gt96) & (gdf$gt97 == gdf$gt96)) 
 boo <- (gdf$gt96 %in% gv) & (gdf$gt97 %in% gv) & (gdf$gt98 %in% gv) & boo1 & (df$V6 > 20) & nchar(la) == 1
 
 dff <- df[boo,]
 gdff <- gdf[boo,]
-
-# Annotate with common SNP or previously ID'd as 'Crispr' snp 
-isCommonSNP <- paste0(dff$V1,"_",as.character(dff$V2)) %in% paste0(snps$V1,"_",as.character(snps$V2))
 
 crispF03 <- rbind(
   read.table("F03--FVB.snv.lofreq.v2.1.3a.filtered.vcf", stringsAsFactors = FALSE)[,c(1,2)],
@@ -46,6 +46,7 @@ crispF05 <- rbind(
 
 isCrisprSNP <- (paste0(dff$V1,"_",as.character(dff$V2)) %in% paste0("chr", crispF03$V1,"_",as.character(crispF03$V2))) &
                (paste0(dff$V1,"_",as.character(dff$V2)) %in% paste0("chr", crispF05$V1,"_",as.character(crispF05$V2)))
+
 sum(isCrisprSNP)
 
 # Annotate with specific mouse
@@ -53,7 +54,7 @@ countsdiff <- data.frame(
   c96 = unname(sapply(gdff$gt96, function(d){sum(as.numeric(strsplit(d, split = "/")[[1]]))})),
   c97 = unname(sapply(gdff$gt97, function(d){sum(as.numeric(strsplit(d, split = "/")[[1]]))})),
   c98 = unname(sapply(gdff$gt98, function(d){sum(as.numeric(strsplit(d, split = "/")[[1]]))}))
-) %>% data.matrix()
+) %>% data.matrix() + 1 # plus 1 because tabulate gets upset otherwise
 
 modefunc <- function(x){
   tabresult <- tabulate(x)
@@ -64,15 +65,16 @@ modefunc <- function(x){
 
 # I'm taking the mode to identify the "rare" individual and the contorting it such that
 # two 1s appear in the final matrix that indicate that both shared these mutations
-distingmat <- abs(abs(countsdiff - apply(countsdiff, 1, modefunc)) - 1)
 
 # Make bedfile output
-uniqVarMat <- abs(countsdiff - apply(countsdiff, 1, modefunc))
+uniqVarMat <- countsdiff != apply(countsdiff, 1, modefunc)
 uniqVarVec <- uniqVarMat[,1]*1 +  uniqVarMat[,2]*2 +  uniqVarMat[,3]*3
 anno <- ifelse(uniqVarVec == 1, "F05", ifelse(uniqVarVec == 2, "F03", "FVB"))
 
 # Make Final Output
-outdf <- data.frame(dff[,c(1,2)], dff[,c(2)+1], anno, isCrisprSNP, )
+outdf <- data.frame(dff[,c(1,2)], dff[,c(2)]+1, anno, isCrisprSNP, isCommonSNP)
+write.table(outdf, file = "processedGATK_20june.bed", sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
+
 
 #library(dplyr)
 #df2 <- data.frame(group_by(gdff, gt96, gt97, gt98) %>% summarize(count = n()))
