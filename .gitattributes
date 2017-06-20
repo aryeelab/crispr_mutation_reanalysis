@@ -1,1 +1,2 @@
 *.bed.gz filter=lfs diff=lfs merge=lfs -text
+*calledInAll* filter=lfs diff=lfs merge=lfs -text
