@@ -39,12 +39,31 @@ f1bplot <- ggplot(f1bdf, aes(shared, rate, color = type)) + pretty_plot() +
 
 ggsave(f1bplot, file = "Figure1B.png")
 
+# Make integer approximation to speed up
+ratios <- round(table(snps$mouse) / sum(table(snps$mouse))*100,0)
 distMat <- data.frame(
-  F03 = as.numeric(snps$mouse == "F03"), 
-  F05 = as.numeric(snps$mouse == "F05"), 
-  FVB = as.numeric(snps$mouse == "FVB")
+  F03 = as.numeric(c(rep(1, ratios["F03"]), rep(0, ratios["F05"]), rep(0, ratios["FVB"]))), 
+  F05 = as.numeric(c(rep(0, ratios["F03"]), rep(1, ratios["F05"]), rep(0, ratios["FVB"]))), 
+  FVB  =as.numeric(c(rep(0, ratios["F03"]), rep(0, ratios["F05"]), rep(1, ratios["FVB"])))
 ) %>% data.matrix()
 
-heatmap(distMat, labRow=c("F05", "F03", "FVB"), labCol = NULL, trace="none",
-          col = c("grey", "purple3"), key = FALSE)
+
+
+ratios2 <- round(table(other$mouse) / sum(table(other$mouse))*100,0)
+distMat2 <- data.frame(
+  F03 = as.numeric(c(rep(1, ratios2["F03"]), rep(0, ratios2["F05"]), rep(0, ratios2["FVB"]))), 
+  F05 = as.numeric(c(rep(0, ratios2["F03"]), rep(1, ratios2["F05"]), rep(0, ratios2["FVB"]))), 
+  FVB  =as.numeric(c(rep(0, ratios2["F03"]), rep(0, ratios2["F05"]), rep(1, ratios2["FVB"])))
+) %>% data.matrix()
+
+png("Figure1C1.png")
+heatmap.2(t(distMat2), labCol = rep("", 100), trace="none",
+          col = c("grey", "purple3"), key = FALSE, 
+          dendrogram = "row")
+dev.off()
+png("Figure1C2.png")
+heatmap.2(t(distMat), labCol = rep("", 100), trace="none",
+          col = c("grey", "purple4"), key = FALSE, 
+          dendrogram = "row")
+dev.off()
 
