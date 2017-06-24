@@ -34,7 +34,7 @@ write.table(F05_FVB[,c(1,2,3,6)], file = "../new_processed_calls/treatedF05_norm
 
 write.table(FVB_F03[,c(1,2,3,6)], file = "../new_processed_calls/treatedFVB_normalF03.bed",
             quote = FALSE, row.names = FALSE, col.names = FALSE, sep = "\t")
-write.table(F05_F03[,c(1,2,3,6)], file = "../new_processed_calls/treatedF05_nnormalF03.bed",
+write.table(F05_F03[,c(1,2,3,6)], file = "../new_processed_calls/treatedF05_normalF03.bed",
             quote = FALSE, row.names = FALSE, col.names = FALSE, sep = "\t")
 
 write.table(FVB_F05[,c(1,2,3,6)], file = "../new_processed_calls/treatedFVB_normalF05.bed",
