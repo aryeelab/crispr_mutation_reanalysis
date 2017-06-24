@@ -40,5 +40,5 @@ write.table(ovg[,c(1,2,3,6)], file = "../new_processed_calls/overlap_tF03tF05_nF
 FVB_F03g <- intersectAll("n97_t98")
 FVB_F05g <- intersectAll("n96_t98")
 ovg <- data.frame(F03_FVBg[queryHits(findOverlaps(FVB_F03g,FVB_F05g))]); ovg$end <-  ovg$end + 1
-write.table(ovg[,c(1,2,3,6)], file = "../new_processed_calls/overlap_tFVP_nF03nF05.bed", quote = FALSE, row.names = FALSE, col.names = FALSE)
+write.table(ovg[,c(1,2,3,6)], file = "../new_processed_calls/overlap_tFVB_nF03nF05.bed", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
