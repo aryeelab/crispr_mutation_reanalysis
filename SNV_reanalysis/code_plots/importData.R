@@ -74,17 +74,35 @@ intersectAllDS <- function(sample){
 
 
 # Read in the published variant data
-pubRead <- function(sample2){
+
+readLofreqPub <- function(sample2){
   ldf <- read.table(paste0("../original_variant_calls/",sample2,".snv.lofreq.v2.1.3a.filtered.vcf"))
   lg <- makeGRangesFromDataFrame(ldf, seqnames.field = "V1", start.field = "V2", end.field = "V2")
+  lg
+}
+
+readMutectPub <- function(sample2){
   mdf <- read.table(paste0("../original_variant_calls/", sample2, ".snv.mutect.v1.1.7.filtered.vcf"))
   mg <- makeGRangesFromDataFrame(mdf, seqnames.field = "V1", start.field = "V2", end.field = "V2")
+  mg
+}
+
+readStrelkaPub <- function(sample2){
   sdf <- read.table(paste0("../original_variant_calls/", sample2, ".snv.strelka.v1.0.14.filtered.vcf"))
   sg <- makeGRangesFromDataFrame(sdf, seqnames.field = "V1", start.field = "V2", end.field = "V2")
+  sg
+}
+
+pubIntersectAll <- function(sample2){
+  lg <- readLofreqPub(sample2)
+  mg <- readMutectPub(sample2)
+  sg <- readStrelkaPub(sample2)
   ov1 <- findOverlaps(sg,mg)
   ovall <- findOverlaps(sg[data.frame(ov1)$queryHits], lg)
   variantsCalledg <- lg[data.frame(ovall)$subjectHits]
   addchr(variantsCalledg)
 }
 
-
+in2 <- function(gr1, gr2){
+  return(length(data.frame(findOverlaps(gr1, gr2))$queryHits))
+}
