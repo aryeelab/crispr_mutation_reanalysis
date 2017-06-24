@@ -37,12 +37,14 @@ vdMake <- function(sample){
   )
   return(g1)
 }
-ggsave("F03_FVB.png", plot = vdMake("n98_t97"), device = "png", path = NULL,
-       scale = 1, height = 4, width = 4)
-ggsave("F05_FVB.png", plot = vdMake("n98_t96"), device = "png", path = NULL,
-       scale = 1, height = 4, width = 4)
-ggsave("FVB_F03.png", plot = vdMake("n97_t98"), device = "png", path = NULL,
-       scale = 1, height = 4, width = 4)
-ggsave("FVB_F05.png", plot = vdMake("n96_t98"), device = "png", path = NULL,
-       scale = 1, height = 4, width = 4)
+
+outside <- 3
+ggsave("pngs/F03_FVB.png", plot = vdMake("n98_t97"), device = "png", path = NULL,
+       scale = 1, height = outside, width = outside)
+ggsave("pngs/F05_FVB.png", plot = vdMake("n98_t96"), device = "png", path = NULL,
+       scale = 1, height = outside, width = outside)
+ggsave("pngs/FVB_F03.png", plot = vdMake("n97_t98"), device = "png", path = NULL,
+       scale = 1, height = outside, width = outside)
+ggsave("pngs/FVB_F05.png", plot = vdMake("n96_t98"), device = "png", path = NULL,
+       scale = 1, height = outside, width = outside)
 

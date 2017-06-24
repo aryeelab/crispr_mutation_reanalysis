@@ -3,7 +3,6 @@ library(GenomicRanges)
 library(data.table)
 library(diffloop)
 
-
 readStrelka <- function(sample){
   file <- paste0("../new_variant_calls_raw/strelka_out/strelka_", sample, "/results/passed.somatic.snvs.vcf")
   df <- read.table(file, sep = "\t")
@@ -41,7 +40,7 @@ intersectAll <- function(sample){
 #######################################
 
 readStrelkaDS <- function(sample){
-  file <- paste0("../downsampled_variant_calls/strelka_downsample/strelka_ds_", sample, "/results/passed.somatic.snvs.vcf")
+  file <- paste0("../downsampled_variant_calls/strelka_out/strelka_ds_", sample, "/results/passed.somatic.snvs.vcf")
   df <- read.table(file, sep = "\t")
   gr <- makeGRangesFromDataFrame(df, keep.extra.columns = TRUE, seqnames.field = "V1", start.field = "V2", end.field = "V2")
   gr

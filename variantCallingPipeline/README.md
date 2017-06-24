@@ -8,6 +8,7 @@
 
 **Execution order:**
 
+0. acquire fastq files: []
 1. align/sort: [01_alignBWA.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/01_align_BWAmem.sh)
 2. remove duplicates: [02_removeDuplicates.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/02_removeDuplicates.sh)
 3. add read groups for base recalibration: [03_addReadGroup.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/03_addReadGroup.sh)
@@ -34,8 +35,7 @@ Some details on how particular portions of our variant call pipeline were perfor
 
 ### Versions of software / binaries
 
-The executables used in our analysis are available in the [binaries](binaries/) folder
-in this repository.
+The executables used in our analysis are coordinated here [binaries](binaries/).
 
 ### SNP files
 
