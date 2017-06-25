@@ -51,9 +51,8 @@ writeIntersectFile <- function(sample1, sample2, fileOut){
               quote = FALSE, row.names = FALSE, col.names = FALSE, sep = "\t")
 }
 
-writeIntersectFile("n98_t97", "n98_t96", "treatedF03treatedF05_normalFVB")
-writeIntersectFile("n97_t96", "n97_t98", "treatedF05treatedFVB_normalF03")
-writeIntersectFile("n96_t97", "n96_t98", "treatedF03treatedFVB_normalF05")
-
-writeIntersectFile("n96_t98", "n97_t98", "treatedFVB_normalF03normalF05")
+writeIntersectFile("n98_t97", "n98_t96", "treatedF03_normalFVB__treatedF05_normalFVB")
+writeIntersectFile("n97_t96", "n97_t98", "treatedF05_normalF03__treatedFVB_normalF03")
+writeIntersectFile("n96_t97", "n96_t98", "treatedF03_normalF05__treatedFVB_normalF05")
+writeIntersectFile("n96_t98", "n97_t98", "treatedFVB_normalF03__treatedFVB_normalF05")
 

@@ -17,6 +17,8 @@
 # RStudio files
 .Rproj.user/
 
+*snpDF.rds
+
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
