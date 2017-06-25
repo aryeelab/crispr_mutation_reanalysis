@@ -3,15 +3,10 @@ library(GenomicRanges)
 library(data.table)
 library(diffloop)
 
-#snpDF <- data.frame(fread("zcat <../snps/allMouseSNPloci.bed.gz"))
-#saveRDS(snpDF, "../snps/snpDF.rds")
-snpDF <- readRDS("../snps/snpDF.rds")
 
 readStrelka <- function(sample){
   file <- paste0("../new_variant_calls_raw/strelka_out/strelka_", sample, "/results/passed.somatic.snvs.vcf")
   df <- read.table(file, sep = "\t")
-  boo <- (as.character(df[,2]) %in% snpDF[,2]) & (as.character(df[,1]) %in% snpDF[,1])
-  df <- df[!boo, ]
   gr <- makeGRangesFromDataFrame(df, keep.extra.columns = TRUE, seqnames.field = "V1", start.field = "V2", end.field = "V2")
   gr
 }
@@ -19,8 +14,7 @@ readStrelka <- function(sample){
 readMutect <- function(sample, filtDBSNP = TRUE){
   file <- paste0("../new_variant_calls_raw/mutect_out/mutect_", sample, "/", sample, "mutect.res.tsv")
   df <- read.table(file, sep = "\t", header = TRUE)
-  boo <- (as.character(df$position) %in% snpDF[,2]) & (as.character(df$contig) %in% snpDF[,1])
-  if(filtDBSNP) df <- df[df$dbsnp_site == "NOVEL" & !boo, ]
+  if(filtDBSNP) df <- df[df$dbsnp_site == "NOVEL", ]
   gr <- makeGRangesFromDataFrame(df, keep.extra.columns = TRUE, seqnames.field = "contig", start.field = "position", end.field = "position")
   gr
 }
@@ -28,8 +22,6 @@ readMutect <- function(sample, filtDBSNP = TRUE){
 readLofreq <- function(sample){
   file <- paste0("../new_variant_calls_raw/lofreq_out/", sample, "somatic_final_minus-dbsnp.snvs.vcf.gz")
   df <- data.frame(fread(paste("zcat < ", file)))
-  boo <- (as.character(df[,2]) %in% snpDF[,2]) & (as.character(df[,1]) %in% snpDF[,1])
-  df <- df[!boo, ]
   gr <- makeGRangesFromDataFrame(df, keep.extra.columns = TRUE, seqnames.field = "X.CHROM", start.field = "POS", end.field = "POS")
   gr
 }
