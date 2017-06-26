@@ -1,0 +1,9 @@
+Read 289177 lines
+Discarded 1136 multi-class SNPs
+Printed 84404 known (in dbSNP) SNPs
+Printed 203637 novel SNPs
+Printed 286724 SNPs not at F03F05
+84404 SNPs at DBSNP threeSNPsets.bed.sorted.bed
+1317 SNPs at F03F05 intersect_treatedF03_normalFVB__treatedF05_normalFVB.bed.filt.bed
+280 SNPs at flippedF03 treatedFVB_normalF03.bed.filt.bed
+284 SNPs at flippedF05 treatedFVB_normalF05.bed.filt.bed

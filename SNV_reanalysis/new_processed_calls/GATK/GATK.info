@@ -1,0 +1,10 @@
+read 162 header lines
+read 583774333 lines
+573006360 had no alternate allele
+3247591 had no quality < 20
+806548 had length(ref)>1
+836964 had length(alt)>1
+69712 had >1 alternate alleles
+4944597 had the same mutation
+573384 had coverage < 10 in one or more samples
+printed 289177
