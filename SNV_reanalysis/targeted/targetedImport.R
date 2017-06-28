@@ -11,7 +11,7 @@ readStrelka <- function(sample, type = "novel"){
   gr
 }
   
-readMutect <- function(sample, type = "novel", filt = TRUE){
+readMutect <- function(sample, type = "novel", filt = FALSE){
   file <- paste0("data/mutect_", sample, "_", type, ".vcf.gz")
   df <- data.frame(fread(paste("zcat < ", file)))
   if(filt) df <- df[df$judgement == "KEEP", ]
@@ -19,8 +19,8 @@ readMutect <- function(sample, type = "novel", filt = TRUE){
   gr
 }
 
-readLofreq <- function(sample, type = "novel"){
-  file <- paste0("data/", sample, "_FVB-", type, "tumor_relaxed.vcf.gz")
+readLofreq <- function(sample, type = "novel", meta = "relaxed"){
+  file <- paste0("data/", sample, "_FVB-", type, "tumor_",meta, ".vcf.gz")
   df <- data.frame(fread(paste("zcat < ", file)))
   gr <- makeGRangesFromDataFrame(df, keep.extra.columns = TRUE, seqnames.field = "X.CHROM", start.field = "POS", end.field = "POS")
   gr
