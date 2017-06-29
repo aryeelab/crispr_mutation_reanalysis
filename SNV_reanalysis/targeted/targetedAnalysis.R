@@ -23,3 +23,8 @@ m <- matrix(c(sum(countOverlaps(intersectAll("F03", "dbSNP"),  intersectAll("F05
 m
 
 fisher.test(m)
+chisq.test(m)
+
+binom.test(sum(countOverlaps(intersectAll("F03", "novel"), intersectAll("F05", "novel"))), length(novel), 
+           sum(countOverlaps(intersectAll("F03", "dbSNP"),intersectAll("F05", "dbSNP")))/ length(snps))
+
