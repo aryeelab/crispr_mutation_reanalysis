@@ -12,7 +12,7 @@ ggplot(df1, aes(x = Mouse, y = counts)) +
   labs(x = "Mouse Pairs", y = "% of Pairwise Shared Mutations") + scale_y_continuous(limits = c(0, 50)) + 
   theme(legend.position = "none")
 
-ggsave("plotA.png", height = 3, width = 4, dpi = 300)
+ggsave("plotA.pdf", height = 3, width = 4, dpi = 300, device = "pdf")
 
 df2 <- data.frame(Mouse = mv,
                  counts = c(33.3, 33.3, 33.3),
@@ -25,7 +25,7 @@ ggplot(df2, aes(x = Mouse, y = counts, fill = "val")) +
   labs(x = "Mouse Pairs", y = "% of Pairwise Shared Mutations") + scale_y_continuous(limits = c(0, 50)) +
   theme(legend.position = "none")
 
-ggsave("plotB.png",  height = 3, width = 4, dpi = 300)
+ggsave("plotB.pdf",  height = 3, width = 4, dpi = 300, device = "pdf")
 
 
 df3 <- data.frame(Mouse = mv,
@@ -39,7 +39,7 @@ ggplot(df3, aes(x = Mouse, y = counts, fill = "val")) +
   labs(x = "Mouse Pairs", y = "% of Pairwise Shared Mutations") + scale_y_continuous(limits = c(0, 50)) +
   theme(legend.position = "none")
 
-ggsave("plotC.png", height = 3, width = 4, dpi = 300)
+ggsave("plotC.pdf", height = 3, width = 4, dpi = 300, device = "pdf")
 
 df4 <- data.frame(Mouse =  c("F03 & F05", "F03 & F05", "F03 & FVB", "F05 & FVB"),
                  counts = c((16097-1256)/38981*100, 1256/38981*100, 10881/38981*100, 12003/38981*100),
@@ -48,11 +48,11 @@ df4 <- data.frame(Mouse =  c("F03 & F05", "F03 & F05", "F03 & FVB", "F05 & FVB")
 
 ggplot(df4, aes(x = Mouse, y = counts, fill = class)) +
   geom_bar(stat = "identity", color = "black" ) + pretty_plot() + 
-  scale_fill_manual(values=c('firebrick', 'grey')) + 
+  scale_fill_manual(values=c('gray20', 'grey')) + 
   labs(x = "Mouse Pairs", y = "% of Pairwise Shared Mutations") + scale_y_continuous(limits = c(0, 50)) +
   theme(legend.position = "none") + 
 
-ggsave("plotD.png", height = 3, width = 4, dpi = 300)
+ggsave("plotD.pdf", height = 3, width = 4, dpi = 300, device = "pdf")
 
 
 fisher.test(matrix(c(12954, 31079-12954, 16097, 38981- 16097),nrow=2))
