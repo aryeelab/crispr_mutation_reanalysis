@@ -6,9 +6,8 @@ length(intersectAll("F05", "dbSNP"))
 length(intersectAll("F03", "novel"))
 length(intersectAll("F03", "dbSNP"))
 
-expected <- bedToGRanges("GATK.out.anno.F03F05.bed")
-snps <- bedToGRanges("data/venn.dbSNP110.bed")
-novel <- bedToGRanges("data/venn.novel110.bed")
+length(intersectAll("FVB", "novel"))
+length(intersectAll("FVB", "dbSNP"))
 
 sum(countOverlaps(expected, intersectAll("F03", "novel")) != 0)
 sum(countOverlaps(expected, intersectAll("F05", "novel")) != 0)
