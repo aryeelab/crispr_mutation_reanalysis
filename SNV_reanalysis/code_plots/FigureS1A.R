@@ -23,8 +23,8 @@ length(F05_FVB)
 #write.table(data.frame(flip_F05_FVB)[,c(1,2,3)], file = "../new_processed_calls/flip_FVB_F05_n96_t98.processed.bed", quote = FALSE, row.names = FALSE, col.names = FALSE)
 
 
-F03_FVB_pub <- pubRead("F03--FVB")
-F05_FVB_pub <- pubRead("F05--FVB")
+F03_FVB_pub <- pubIntersectAll("F03--FVB")
+F05_FVB_pub <- pubIntersectAll("F05--FVB")
 
 # Quantify how many variants I was able to recall
 sum(countOverlaps(F03_FVB, F03_FVB_pub))/length(F03_FVB_pub)
@@ -44,4 +44,4 @@ f1a <- ggplot(data = df, aes(x=Mouse, y=Count, fill=Variant)) +
   geom_bar(stat = "identity", colour="black") + pretty_plot()+
   scale_fill_manual(values=c('firebrick', 'green4', 'dodgerblue')) + 
   theme( legend.position="bottom")+labs(colour = "Variant Type", fill = "Variant Type")
-ggsave(f1a, file = "Figure1A.png", dpi = 300, width = 5, height = 5)
+ggsave(f1a, file = "pngs/SFigure1A.png", dpi = 300, width = 5, height = 5)

@@ -12,8 +12,8 @@ source("importData.R")
 # Define import functions that return GRanges of variant loci
 # For each variant call method
 
-F03_FVB_pub <- pubRead("F03--FVB")
-F05_FVB_pub <- pubRead("F05--FVB")
+F03_FVB_pub <- pubIntersectAll("F03--FVB")
+F05_FVB_pub <- pubIntersectAll("F05--FVB")
 
 F03_FVB <- intersectAll("n98_t97")
 F05_FVB <- intersectAll("n98_t96")
@@ -41,13 +41,22 @@ d <- data.frame(
             length(intersectAllDS("n96_t98")), length(intersectAllDS("n96_t97")), length(intersectAllDS("n97_t96")))
   )
 
-p1 <- ggplot(d, aes(normal, count, color = treated)) + pretty_plot() + facet_grid(. ~ state) +
-  labs(x = "Control Mouse", y = "SNV Count using Intersection of Methods") +
-  geom_bar(width = 0.7, aes(fill = treated), colour="black", stat = "identity", position = position_dodge(width=0.7)) +
-  scale_fill_manual(values=c('green4', 'firebrick', 'dodgerblue')) + 
-  theme( legend.position="bottom")+labs(colour = "Treatment Mouse", fill = "Treatment Mouse") +
-  theme(legend.key = element_blank(), strip.background = element_rect(fill="white", colour="black") ) 
-ggsave(p1, file = "variantCallDownsample.png")
+
+
+# p1 <- ggplot(d, aes(normal, count, color = treated)) + pretty_plot() + facet_grid(. ~ state) +
+#   labs(x = "Control Mouse", y = "SNV Count using Intersection of Methods") +
+#   geom_bar(width = 0.7, aes(fill = treated), colour="black", stat = "identity", position = position_dodge(width=0.7)) +
+#   scale_fill_manual(values=c('green4', 'firebrick', 'dodgerblue')) + 
+#   theme( legend.position="bottom")+labs(colour = "Treatment Mouse", fill = "Treatment Mouse") +
+#   theme(legend.key = element_blank(), strip.background = element_rect(fill="white", colour="black") ) 
+# ggsave(p1, file = "variantCallDownsample.png")
+# 
+
+f1a <- ggplot(data = df, aes(x=treated, y=Count, fill=Variant)) + 
+  geom_bar(stat = "identity", colour="black") + pretty_plot()+
+  scale_fill_manual(values=c('firebrick', 'green4', 'dodgerblue')) + 
+  theme( legend.position="bottom")+labs(colour = "Variant Type", fill = "Variant Type")
+ggsave(f1a, file = "pngs/SFigure1A.png", dpi = 300, width = 5, height = 5)
 
 length(intersectAll("n98_t97"))
 length(intersectAll("n98_t97"))
