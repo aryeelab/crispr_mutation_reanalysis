@@ -6,6 +6,8 @@ Analysis by members of the [Aryee](https://aryee.mgh.harvard.edu/), [Joung](http
 This repository contains the scripts, commands, and most data required for the reanalysis of
 [this manuscript](https://www.nature.com/nmeth/journal/v14/n6/full/nmeth.4293.html).
 
+![](media/Figure1.pdf)
+
 ## Specific Analyses
 
 Below is a synopsis of what we did and how one can navigate this web resource to access the files and data. 
