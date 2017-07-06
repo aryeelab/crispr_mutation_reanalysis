@@ -1,14 +1,47 @@
 <br><br>
 
-# Reanalysis of Unexpected mutations after CRISPR–Cas9 editing _in vivo_
+# “Unexpected mutations after CRISPR-Cas9 editing in vivo” are most likely pre-existing sequence variants and not nuclease-induced mutations
 
-Analysis by members of the [Aryee](https://aryee.mgh.harvard.edu/), [Joung](http://www.jounglab.org/), and [Pinello](http://pinellolab.org/) Labs at MGH/Harvard.
-This repository contains the scripts, commands, and most data required for the reanalysis of
-[this manuscript](https://www.nature.com/nmeth/journal/v14/n6/full/nmeth.4293.html).
+This web resource contains the scripts, commands, and most data required for what we
+reported in this [bioRxiv preprint](http://www.biorxiv.org/content/early/2017/07/05/159707).
+
+If something's missing or doesn't make sense, feel free to shoot [Caleb](mailto:caleblareau@g.harvard.edu)
+an email.
+
+Our re-analysis was conducted by members of the [Aryee](https://aryee.mgh.harvard.edu/),
+[Joung](http://www.jounglab.org/), and [Pinello](http://pinellolab.org/) Labs at MGH/Harvard
+in response [this manuscript](https://www.nature.com/nmeth/journal/v14/n6/full/nmeth.4293.html).
+
+
+## Overview
+
+In brief, we genotype the mice from the WGS data using GATK and replicate the "cancer pipeline"
+calls from the original informatic analysis pipeline. A succinct summary how we structured
+the sensible assumptions needed to determine if mutations were caused by Cas9 contrasted
+with the observed data are contained in our main figure. 
 
 ![](media/Figure1.png)
 
-## Specific Analyses
+**Figure 1. Measures of genetic relatedness in the F03, F05 and FVB mice.**
+Schaefer et al.’s experimental model to examine mutations attributable to Cas9 treatment
+relies on the assumption that mice are isogenic, meaning no private mutations are observed
+within or shared between mice as depicted in (A). However, after genotyping these mice using
+GATK best practices, we observe a significant departure from this model, suggesting that the
+F03 and F05 mice are more genetically related at common variants (B; n = 31,079).
+As an isogenic system is practically impossible, the selection of littermate assumes the number
+of loci with shared genotypes is nearly identical for all mice, leading to equivalent genetic
+distances separating them as shown in (C).  This representation of an equal genetic model
+demonstrates a clear departure from the observed data at common variants and other non-dbSNP
+loci that we term “novel variants” (D; n = 38,981). Additionally, the variants previously
+reported by Schaefer et al. (dark gray, D) represent a small subset of the genotypes common
+to F03 and F05 but distinct from FVB at non-dbSNP sites. The observed ratios in B and D cannot
+be distinguished from each other (p = 0.304; two-sided Fisher’s Exact Test), but each
+represent a significant departure (p < 2.2 10-16; Chi-Squared Test) from the equal genetic
+distance model (C) required to attribute differential SNVs to Cas9 activity.
+Panel (E) provides a graphical summary of these models of genetic relatedness using under
+the two hypothetical models and the two sets of observed variants. 
+
+## Our Analyses
 
 Below is a synopsis of what we did and how one can navigate this web resource to access the files and data. 
 
@@ -18,7 +51,7 @@ The pipeline for recalling variants from the `.fastq` files is found [here](vari
 Our reanalysis followed [this protocol](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4243306/) for
 best practices in aligning and prepping whole-genome sequencing samples. 
 
-## File naming conventions
+### File naming conventions
 
 Throughout the repository, most samples in the reanalysis are ID'd
 by the last two digits of the `SRR` number. This table is the most useful key--
@@ -38,6 +71,6 @@ For example, the output file of `n96_t98` would be the 96 sample (F05) is the `n
 - Install [git large file storage](https://git-lfs.github.com/) before cloning repository
 to get some of the larger files in the repository.
 - Accessing specific scripts and data may be easier using the navigation tools on the 
-main [GitHub Repository here](https://github.com/aryeelab/crispr_reanalysis).
+main [GitHub Repository here](https://github.com/aryeelab/crispr_mutation_reanalysis).
 
 <br><br>
