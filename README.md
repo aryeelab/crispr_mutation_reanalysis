@@ -5,12 +5,10 @@
 This web resource contains the scripts, commands, and most data required for what we
 reported in this [bioRxiv preprint](http://www.biorxiv.org/content/early/2017/07/05/159707).
 
-If something's missing or doesn't make sense, feel free to shoot [Caleb](mailto:caleblareau@g.harvard.edu)
-an email.
 
 Our re-analysis was conducted by members of the [Aryee](https://aryee.mgh.harvard.edu/),
 [Joung](http://www.jounglab.org/), and [Pinello](http://pinellolab.org/) Labs at MGH/Harvard
-in response [this manuscript](https://www.nature.com/nmeth/journal/v14/n6/full/nmeth.4293.html).
+in response to [this manuscript](https://www.nature.com/nmeth/journal/v14/n6/full/nmeth.4293.html).
 
 
 ## Overview
@@ -72,5 +70,11 @@ For example, the output file of `n96_t98` would be the 96 sample (F05) is the `n
 to get some of the larger files in the repository.
 - Accessing specific scripts and data may be easier using the navigation tools on the 
 main [GitHub Repository here](https://github.com/aryeelab/crispr_mutation_reanalysis).
+
+## Contact
+
+- If something's missing or doesn't make sense, feel free to shoot [Caleb](mailto:caleblareau@g.harvard.edu)
+an email.
+- For general questions regarding the manuscript, email one of the corresponding authors. 
 
 <br><br>
