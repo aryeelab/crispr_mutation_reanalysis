@@ -1,0 +1,47 @@
+details:
+- algorithm:
+    aligner: bowtie2
+    mark_duplicates: true
+    realign: gatk
+    recalibrate: gatk
+    variantcaller: gatk-haplotype
+  analysis: variant2
+  description: F05
+  files:
+  - /data/pinello/PROJECTS/2017_05_CRISPR_SNV/SRA/SRR5450996_1.fastq.gz
+  - /data/pinello/PROJECTS/2017_05_CRISPR_SNV/SRA/SRR5450996_2.fastq.gz
+  genome_build: mm10
+  metadata:
+    phenotype: tumor
+- algorithm:
+    aligner: bowtie2
+    mark_duplicates: true
+    realign: gatk
+    recalibrate: gatk
+    variantcaller: gatk-haplotype
+  analysis: variant2
+  description: F03
+  files:
+  - /data/pinello/PROJECTS/2017_05_CRISPR_SNV/SRA/SRR5450997_1.fastq.gz
+  - /data/pinello/PROJECTS/2017_05_CRISPR_SNV/SRA/SRR5450997_2.fastq.gz
+  genome_build: mm10
+  metadata:
+    phenotype: tumor
+- algorithm:
+    aligner: bowtie2
+    mark_duplicates: true
+    realign: gatk
+    recalibrate: gatk
+    variantcaller: gatk-haplotype
+  analysis: variant2
+  description: FVB
+  files:
+  - /data/pinello/PROJECTS/2017_05_CRISPR_SNV/SRA/SRR5450998_1.fastq.gz
+  - /data/pinello/PROJECTS/2017_05_CRISPR_SNV/SRA/SRR5450998_2.fastq.gz
+  genome_build: mm10
+  metadata:
+    phenotype: normal
+fc_date: '2017-06-02'
+fc_name: GATK_pipeline
+upload:
+  dir: ../final

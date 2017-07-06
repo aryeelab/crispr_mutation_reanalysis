@@ -1,0 +1,30 @@
+perl filter.pl ../../SRR5450997.gatk.raw.snps.indels.g.vcf.gz
+read 159 header lines
+read 155865188 lines
+got 8552529 lines with SNPs
+got 7087153 lines passing quality (>20)
+got 732263 hets
+536.525u 10.455s 9:07.06 99.9%  0+0k 4684496+0io 0pf+0w
+
+8:23pm kendell@silver /broad/hptmp/kendell/snps/compareGATK_caleb/caleb/filterCaleb/countHet $ perl filter.pl ../../SRR5450996.gatk.raw.snps.indels.g.vcf.gz
+read 159 header lines
+read 146462879 lines
+got 8318499 lines with SNPs
+got 6972046 lines passing quality (>20)
+got 664436 hets
+400.548u 10.729s 7:21.00 93.2%  0+0k 4491688+8io 0pf+0w
+8:31pm kendell@silver /broad/hptmp/kendell/snps/compareGATK_caleb/caleb/filterCaleb/countHet $ perl filter.pl ../../SRR5450998
+SRR5450998.gatk.raw.snps.indels.g.vcf.filtered
+SRR5450998.gatk.raw.snps.indels.g.vcf.gz*
+SRR5450998.gatk.raw.snps.indels.g.vcf.gz.tbi*
+8:31pm kendell@silver /broad/hptmp/kendell/snps/compareGATK_caleb/caleb/filterCaleb/countHet $ perl filter.pl ../../SRR5450998.gatk.raw.snps.indels.g.vcf.g
+SRR5450998.gatk.raw.snps.indels.g.vcf.gz*
+SRR5450998.gatk.raw.snps.indels.g.vcf.gz.tbi*
+8:31pm kendell@silver /broad/hptmp/kendell/snps/compareGATK_caleb/caleb/filterCaleb/countHet $ perl filter.pl ../../SRR5450998.gatk.raw.snps.indels.g.vcf.gz
+read 159 header lines
+read 470028160 lines
+got 8134898 lines with SNPs
+got 6809736 lines passing quality (>20)
+got 580338 hets
+1233.618u 30.723s 22:35.26 93.2%        0+0k 12262152+0io 1pf+0w
+

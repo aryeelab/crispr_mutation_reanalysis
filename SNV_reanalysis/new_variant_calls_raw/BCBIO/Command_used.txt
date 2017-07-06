@@ -1,0 +1,1 @@
+Command used: bcbio_nextgen.py ../config/GATK_pipeline.yaml -t local -n 4

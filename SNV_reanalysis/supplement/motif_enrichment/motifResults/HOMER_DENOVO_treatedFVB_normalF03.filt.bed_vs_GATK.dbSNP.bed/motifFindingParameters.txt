@@ -1,0 +1,1 @@
+cmd = treatedFVB_normalF03.filt.100bp.fa fasta motifResults/HOMER_DENOVO_treatedFVB_normalF03.filt.bed_vs_GATK.dbSNP.bed -fasta GATK.dbSNP.100bp.fa -noknown -cache 8000
