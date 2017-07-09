@@ -6,6 +6,10 @@
 
 # GATK Best Practices for Alignment
 
+For processing the data from GEO -> `.fastq` -> high-quality `.bam`, 
+we used [GATK Best Practices as outlined here](http://onlinelibrary.wiley.com/doi/10.1002/0471250953.bi1110s43/abstract).
+Briefly, attached are our shell scripts for producing the finalized `.bam` files from the uploaded data on GEO. 
+
 **Execution order:**
 
 0. acquire fastq files: [00_getFastq.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/00_getFastq.sh)
@@ -32,10 +36,6 @@ in parallel over each sample pair per chromsome
 # Other noteworthy bits
 
 Some details on how particular portions of our variant call pipeline were performed. 
-
-### Versions of software / binaries
-
-The executables used in our analysis are coordinated here [binaries](binaries/).
 
 ### SNP files
 
