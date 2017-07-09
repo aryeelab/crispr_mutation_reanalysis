@@ -1,6 +1,6 @@
 <br><br>
 
-# Scripts used for variant calling
+# Scripts used for cancer pipeline calling
 
 **Contact:** [Caleb Lareau](mailto:caleblareau@g.harvard.edu)
 
@@ -8,26 +8,26 @@
 
 **Execution order:**
 
-0. acquire fastq files: []
-1. align/sort: [01_alignBWA.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/01_align_BWAmem.sh)
-2. remove duplicates: [02_removeDuplicates.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/02_removeDuplicates.sh)
-3. add read groups for base recalibration: [03_addReadGroup.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/03_addReadGroup.sh)
-4. identify sites (indels) for realignment: [04_indelRealignIdentificaiton.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/04_indelRealignIdentificaiton.sh)
-5. realign identified loci from 4: [05_indelRealign.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/05_indelRealign.sh)
-6. print reads (makes final .bam file): [06_printReads.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/06_printReads.sh)
+0. acquire fastq files: [00_getFastq.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/00_getFastq.sh)
+1. align/sort: [01_alignBWA.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/01_align_BWAmem.sh)
+2. remove duplicates: [02_removeDuplicates.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/02_removeDuplicates.sh)
+3. add read groups for base recalibration: [03_addReadGroup.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/03_addReadGroup.sh)
+4. identify sites (indels) for realignment: [04_indelRealignIdentificaiton.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/04_indelRealignIdentificaiton.sh)
+5. realign identified loci from 4: [05_indelRealign.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/05_indelRealign.sh)
+6. print reads (makes final .bam file): [06_printReads.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/06_printReads.sh)
 
-# Variant Calling Scripts
+# Cancer Pipeline Variant Calling Scripts
 
 These specific scripts were not necessarily executed "as is" but were often
 divided into individual scripts used to parallelize the execution over multiple
 nodes on Erisone. 
 
-- Variant calling with [Lofreq](http://csb5.github.io/lofreq/commands/)-- The [lofreqCommads.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh) file 
+- Variant calling with [Lofreq](http://csb5.github.io/lofreq/commands/)-- The [lofreqCommads.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh) file 
 contains all commands used to call variants with Lofreq `cat` together. In actuality, each command was run individually for performance. 
-- Variant calling with [muTect](http://archive.broadinstitute.org/cancer/cga/mutect_run)-- Built [this execution shell script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectExec.sh)
-from [this R script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/makeMutectExec.R) in order to run [this muTect shell command](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectRunner.sh)
+- Variant calling with [muTect](http://archive.broadinstitute.org/cancer/cga/mutect_run)-- Built [this execution shell script](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectExec.sh)
+from [this R script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/makeMutectExec.R) in order to run [this muTect shell command](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectRunner.sh)
 in parallel over each sample pair per chromsome
-- Variant calling with [Strelka](https://github.com/Illumina/strelka/blob/master/docs/userGuide/README.md)-- [strelkaCommands.sh](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh)
+- Variant calling with [Strelka](https://github.com/Illumina/strelka/blob/master/docs/userGuide/README.md)-- [strelkaCommands.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh)
 
 # Other noteworthy bits
 

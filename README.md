@@ -5,7 +5,6 @@
 This web resource contains the scripts, commands, and most data required for what we
 reported in this [bioRxiv preprint](http://www.biorxiv.org/content/early/2017/07/05/159707).
 
-
 Our re-analysis was conducted by members of the [Aryee](https://aryee.mgh.harvard.edu/),
 [Joung](http://www.jounglab.org/), and [Pinello](http://pinellolab.org/) Labs at MGH/Harvard
 in response to [this manuscript](https://www.nature.com/nmeth/journal/v14/n6/full/nmeth.4293.html).
