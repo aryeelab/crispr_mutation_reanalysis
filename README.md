@@ -38,7 +38,34 @@ distance model (C) required to attribute differential SNVs to Cas9 activity.
 Panel (E) provides a graphical summary of these models of genetic relatedness using under
 the two hypothetical models and the two sets of observed variants. 
 
-## Our Analyses
+## Data access
+
+Arguably, the most important files for understanding our response manuscript are the raw 
+genotype files called from GATK. These can be accessed from an AWS instance as the
+files exceed a combined **7 gigabytes**. 
+
+```
+wget https://s3.amazonaws.com/crispr-mutation-reanalysis/allSamples.merged.fullData.vcf.gz
+wget https://s3.amazonaws.com/crispr-mutation-reanalysis/allSamples.merged.fullData.vcf.gz.tbi
+```
+
+Additionally, the full set of loci that we used to annotate whether variants were in dbSNP or not:
+
+```
+wget https://s3.amazonaws.com/crispr-mutation-reanalysis/allSNPannotations.bed.gz
+```
+
+**Note:** this isn't a `.bed` file _per se_ as it only has two columns, which was
+constructed as such to save space. A third column can be added using a simple `awk` command
+and adding 1 to the second field (_i.e._: `$2 +1`) and potentially a dummy fourth column
+depending on the down-stream analysis tool. 
+
+Finally, **the original authors were gracious enough to provide us with their code and results**,
+which we have integrated into our analysis framework and hosted in our
+[git repository here](https://github.com/aryeelab/crispr_mutation_reanalysis/tree/master/SNV_reanalysis/original_variant_calls)
+
+
+## Our analyses
 
 Below is a synopsis of what we did and how one can navigate this web resource to access the files and data. 
 

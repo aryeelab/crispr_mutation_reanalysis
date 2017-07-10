@@ -1,8 +1,8 @@
 <br><br>
 
-# Scripts used for cancer pipeline calling
+# Scripts used for GEO -> Variant Calls
 
-**Contact:** [Caleb Lareau](mailto:caleblareau@g.harvard.edu)
+**Contact:** [Caleb Lareau](mailto:caleblareau@g.harvard.edu)3
 
 # GATK Best Practices for Alignment
 
@@ -20,54 +20,50 @@ Briefly, attached are our shell scripts for producing the finalized `.bam` files
 5. realign identified loci from 4: [05_indelRealign.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/05_indelRealign.sh)
 6. print reads (makes final .bam file): [06_printReads.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/06_printReads.sh)
 
+With the finalized `.bam` file
+
 # Cancer Pipeline Variant Calling Scripts
 
 These specific scripts were not necessarily executed "as is" but were often
 divided into individual scripts used to parallelize the execution over multiple
-nodes on Erisone. 
+nodes on our computing cluster. In addition to 
 
-- Variant calling with [Lofreq](http://csb5.github.io/lofreq/commands/)-- The [lofreqCommads.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh) file 
+- Variant calling with [Lofreq](http://csb5.github.io/lofreq/commands/)-- The [lofreqCommads.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/lofreqCommands.sh) file 
 contains all commands used to call variants with Lofreq `cat` together. In actuality, each command was run individually for performance. 
 - Variant calling with [muTect](http://archive.broadinstitute.org/cancer/cga/mutect_run)-- Built [this execution shell script](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectExec.sh)
 from [this R script](https://github.com/aryeelab/crispr_reanalysis/blob/master/variantCallingPipeline/call_mutations/makeMutectExec.R) in order to run [this muTect shell command](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/mutectRunner.sh)
 in parallel over each sample pair per chromsome
 - Variant calling with [Strelka](https://github.com/Illumina/strelka/blob/master/docs/userGuide/README.md)-- [strelkaCommands.sh](https://github.com/aryeelab/crispr_mutation_reanalysis/blob/master/variantCallingPipeline/call_mutations/strelkaCommands.sh)
 
-# Other noteworthy bits
+# GATK Genotyping Workflow
 
 Some details on how particular portions of our variant call pipeline were performed. 
 
-### SNP files
+## Output
 
-The location of these files was specified in the supplement of the manuscript. The processing of these
-files entailed the following. First, these were downloaded--
-
-```
-wget ftp://ftp.ncbi.nlm.nih.gov/snp/organisms/mouse_10090/VCF/genotype/SC_MOUSE_GENOMES.genotype.vcf.gz
-wget ftp://ftp-mouse.sanger.ac.uk/REL-1303-SNPs_Indels-GRCm38/mgp.v3.snps.rsIDdbSNPv137.vcf.gz
-```
-
-Then, some mild reprocessing was required by appending `chr` to the chromosome names. 
-This was because the reference genome I aligned to was mm10 which includes `chr` in the chromosome
-names but are otherwise identical. , compress, and then reindex--
+Data from our final merged `.vcf` file is quite large. These can be accessed from an AWS instance as the
+files exceed a combined **7 gigabytes**. Download with caution-- 
 
 ```
-zcat mgp.v3.snps.rsIDdbSNPv137.vcf.gz | awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' | bgzip > chrdbSNP.vcf.gz
-zcat SC_MOUSE_GENOMES.genotype.vcf.gz | awk '{if($0 !~ /^#/) print "chr"$0; else print $0}' | bgzip > chrMouseSNPs.vcf.gz
+wget https://s3.amazonaws.com/crispr-mutation-reanalysis/allSamples.merged.fullData.vcf.gz
+wget https://s3.amazonaws.com/crispr-mutation-reanalysis/allSamples.merged.fullData.vcf.gz.tbi
 ```
 
-Rather than doing `vcftools` filtering, we opted to create a simple positional file of the SNPs for 
-later filtering in say in `R` environment. 
+
+### SNP file
+
+Due to some inconsistencies in the way the dbSNP annotations were reported in the supplement
+of the original manuscript, we wound up making a custom SNP list that was a union of dbSNP 137 and 138.
+This file that was used to classify variants as in dbSNP or not can be accessed here:
 
 ```
-zcat chrMouseSNPs.vcf.gz chrdbSNP.vcf.gz | cut -f 1,2 | sort -gk 1,2  | uniq  | gzip > allMouseSNPloci.bed.gz
+wget https://s3.amazonaws.com/crispr-mutation-reanalysis/allSNPannotations.bed.gz
 ```
 
-To get a true bed file--
-
-```
-zcat allMouseSNPloci.bed.gz | awk '{print $0"\t"$2+1}' > snpLoci.bed
-```
+**Note:** this isn't a `.bed` file _per se_ as it only has two columns, which was
+constructed as such to save space. A third column can be added using a simple `awk` command
+and adding 1 to the second field (_i.e._: `$2 +1`) and potentially a dummy fourth column
+depending on the down-stream analysis tool. 
 
 ### Downsampling CRISPR treated samples
 
@@ -87,5 +83,10 @@ file was copied--
 ```
 cp SRR5450996.final.bam SRR5450996.subsample.bam
 ```
+
+From these `*.subsample.bam` files, we performed the cancer pipeline and the GATK genotyping
+pipeline over again. These results were used sparingly to convince ourselves that the 
+variation in sequencing depth did not have a profound effect on the inference and analyses
+of this study and our results. 
 
 <br><br>
