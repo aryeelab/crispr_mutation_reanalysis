@@ -37,9 +37,42 @@ in parallel over each sample pair per chromsome
 
 # GATK Genotyping Workflow
 
-Some details on how particular portions of our variant call pipeline were performed. 
+After obtaining our finalized `.bam` files from the workflow above, we used GATK
+to genotype each sample and then a series of post processing steps to generate the
+final, merged `.vcf` file, which we've made publicly available through our AWS instance. 
 
-## Output
+Using the standard `HaplotypeCaller` mode in GATK, we performed a straightforward genotyping for
+each one of these mice--
+
+```
+sample=$1
+
+java -Djava.io.tmpdir=`pwd`/fastq/tmp  -jar GenomeAnalysisTK.jar -T HaplotypeCaller -R /data/aryee/pub/genomes/mm10/mm10.fa -I "${sample}.final.bam" --emitRefConfidence GVCF -o "${sample}.gatk.raw.snps.indels.g.vcf"
+```
+
+Before we could merge the genotype calls, we had to rename / reheader the samples. After some `bgzip`-ing and indexing, 
+the following command was executed for each sample
+
+```
+sample=$1
+
+bcftools reheader -s "${sample}.txt" "${sample}.gatk.raw.snps.indels.g.vcf.gz" > "${sample}.rename.vcf.gz"
+```
+
+**Note:** the `SRR545099*.txt` files are simply just the SRR name as a singular field in these files--
+
+```
+> cat SRR5450996.txt
+SRR5450996
+```
+
+Finally, the renamed `.vcf` files could be merged using `bcftools`. 
+
+```
+./bcftools merge -g /data/aryee/pub/genomes/mm10/mm10.fa SRR5450996.rename.vcf.gz SRR5450997.rename.vcf.gz SRR5450998.rename.vcf.gz  -O z > allSamples.merged.fullData.vcf.gz
+```
+
+### Output
 
 Data from our final merged `.vcf` file is quite large. These can be accessed from an AWS instance as the
 files exceed a combined **7 gigabytes**. Download with caution-- 
@@ -50,7 +83,7 @@ wget https://s3.amazonaws.com/crispr-mutation-reanalysis/allSamples.merged.fullD
 ```
 
 
-### SNP file
+### SNP annotation file
 
 Due to some inconsistencies in the way the dbSNP annotations were reported in the supplement
 of the original manuscript, we wound up making a custom SNP list that was a union of dbSNP 137 and 138.
@@ -64,6 +97,7 @@ wget https://s3.amazonaws.com/crispr-mutation-reanalysis/allSNPannotations.bed.g
 constructed as such to save space. A third column can be added using a simple `awk` command
 and adding 1 to the second field (_i.e._: `$2 +1`) and potentially a dummy fourth column
 depending on the down-stream analysis tool. 
+
 
 ### Downsampling CRISPR treated samples
 
