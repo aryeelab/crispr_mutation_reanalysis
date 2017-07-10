@@ -62,7 +62,7 @@ depending on the down-stream analysis tool.
 
 Finally, **the original authors were gracious enough to provide us with their code and results**,
 which we have integrated into our analysis framework and hosted in our
-[git repository here](https://github.com/aryeelab/crispr_mutation_reanalysis/tree/master/SNV_reanalysis/original_variant_calls)
+[git repository here](https://github.com/aryeelab/crispr_mutation_reanalysis/tree/master/SNV_reanalysis/original_variant_calls).
 
 
 ## Our analyses
@@ -71,9 +71,15 @@ Below is a synopsis of what we did and how one can navigate this web resource to
 
 ### Variant Recalling
 
-The pipeline for recalling variants from the `.fastq` files is found [here](variantCallingPipeline). 
+The pipeline for recalling variants from the `.fastq` files is found [here](variant_calling_pipeline). 
 Our reanalysis followed [this protocol](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4243306/) for
 best practices in aligning and prepping whole-genome sequencing samples. 
+
+### Main text figure
+
+
+### Supplement
+
 
 ### File naming conventions
 
@@ -87,8 +93,8 @@ F05 - Treated - 96
 ```
 
 When doing variant calling, the normal tissue is specified with an `n` and the tumor tissue with a `t`. 
-For example, the output file of `n96_t98` would be the 96 sample (F05) is the `n = normal` and
-98 sample (Control) is `t = tumor` when doing variant calling. 
+For example, the output file of `n98_t96` would be the 96 sample (F05) is the `t = tumor` and
+98 sample (Control) is `n = normal` when doing variant calling. 
 
 ## Important
 

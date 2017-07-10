@@ -1,1 +1,0 @@
- bcftools merge -g  SRR5450996.rename.vcf.gz SRR5450997.rename.vcf.gz SRR5450998.rename.vcf.gz /data/aryee/pub/genomes/mm10/mm10.fa -O z > allSamples.merged.fullData.vcf.gz 
