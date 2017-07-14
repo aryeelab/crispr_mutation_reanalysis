@@ -77,9 +77,14 @@ best practices in aligning and prepping whole-genome sequencing samples.
 
 ### Main text figure
 
+The [code for reproducing the main text figure can be found here](https://github.com/aryeelab/crispr_mutation_reanalysis/tree/master/SNV_reanalysis/code_plots/mainText).
+In brief, the absolute numbers of variants are divided into proportions to produce the four panels. The `.bed` files for getting this numbers (use `wc -l *.bed`)
+are [here](https://github.com/aryeelab/crispr_mutation_reanalysis/tree/master/SNV_reanalysis/new_processed_calls/main_text).
 
 ### Supplement
 
+Code for the workflow, figures, etc. associated with our supplement can be found 
+[here](https://github.com/aryeelab/crispr_mutation_reanalysis/tree/master/SNV_reanalysis/code_plots/supplement).
 
 ### File naming conventions
 
